@@ -69,8 +69,11 @@
         </h2>
       </div>
       <div class="conteudo conteudo--largo">
-        <div class="filme" data-revelar>
-          <video controls playsinline preload="none" poster="midia/filme-poster.jpg" src="midia/filme.mp4"></video>
+        <div class="filme" data-revelar data-filme>
+          <video playsinline preload="none" poster="midia/filme-poster.jpg" src="midia/filme.mp4"></video>
+          <button class="filme__play" type="button" aria-label="Reproduzir o filme">
+            <span class="filme__icone" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </section>

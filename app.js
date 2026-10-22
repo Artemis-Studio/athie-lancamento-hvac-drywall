@@ -118,6 +118,16 @@
   new IntersectionObserver(([e]) => indicador.classList.toggle('visivel', e.isIntersecting), {rootMargin: '-40% 0px -40% 0px'})
     .observe(document.querySelector('[data-processo]'));
 
+  // Filme: play grande; os controles nativos aparecem só depois do primeiro play.
+  const filme = document.querySelector('[data-filme]');
+  const filmeVideo = filme.querySelector('video');
+  filme.querySelector('.filme__play').addEventListener('click', () => {
+    filmeVideo.controls = true;
+    filmeVideo.play().catch(() => {});
+  });
+  filmeVideo.addEventListener('play', () => filme.classList.add('tocando'));
+  filmeVideo.addEventListener('ended', () => filme.classList.remove('tocando'));
+
   // Formulário de interesse → POST /api/interesse (servidor.py grava em SQLite).
   // Fora do servidor local (ex.: GitHub Pages, que é só estático) é uma prévia.
   const PREVIA = !['127.0.0.1', 'localhost'].includes(location.hostname);

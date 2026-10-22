@@ -172,6 +172,33 @@ a { color: inherit; }
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55); background: #000;
 }
 .filme video { width: 100%; aspect-ratio: 16 / 9; }
+.filme { position: relative; }
+/* Play grande sobre o pôster; some quando o filme toca e volta no fim. */
+.filme__play {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: 0; border: 0; cursor: pointer;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 20, 22, 0.28), transparent 55%);
+  transition: opacity 0.3s;
+}
+.filme__icone {
+  position: relative; display: grid; place-items: center;
+  width: clamp(76px, 9vw, 120px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--preto); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  transition: transform 0.5s var(--settle), background-color 0.2s;
+}
+.filme__icone::before {
+  content: ''; margin-left: 8%; border-style: solid; border-color: transparent transparent transparent var(--tiffany);
+  border-width: clamp(13px, 1.5vw, 20px) 0 clamp(13px, 1.5vw, 20px) clamp(22px, 2.5vw, 33px);
+}
+.filme__icone::after {
+  content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 2px solid var(--preto);
+  opacity: 0.5; animation: pulsar 2.2s var(--settle) infinite;
+}
+.filme__play:hover .filme__icone { transform: scale(1.08); }
+.filme__play:focus-visible { outline: none; }
+.filme__play:focus-visible .filme__icone { outline: 3px solid var(--tiffany); outline-offset: 6px; }
+.filme.tocando .filme__play { opacity: 0; pointer-events: none; }
+@keyframes pulsar { from { transform: scale(0.92); opacity: 0.6; } to { transform: scale(1.35); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .filme__icone::after { animation: none; } }
 
 /* Processo com indicador fixo (o mesmo do filme) */
 .processo { position: relative; }
